@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────
+   LumiGlow – Global Styles & Design Tokens
+   ───────────────────────────────────────────── */
+
+:root {
+  --cta-gradient: linear-gradient(90deg, #D9BC2B 0%, #A88D10 55%, #7B680C 100%);
+}
+
+@theme {
+  --color-gold:       #C9A227;
+  --color-gold-light: #E8C84A;
+  --color-gold-dark:  #9A7A10;
+  --color-cream:      #FAF7ED;
+  --color-cream-light:#FFFDF6;
+  --color-olive:      #8B7A2E;
+  --color-yellow-lumiglow: #FFD400;
+
+  --font-serif:   "Playfair Display", Georgia, serif;
+  --font-sans:    "Inter", system-ui, sans-serif;
+  --font-script:  "Dancing Script", cursive;
+  --font-outfit:  "Outfit", system-ui, sans-serif;
+  --font-rokkitt: "Rokkitt", Georgia, serif;
+  --font-podkova: "Podkova", serif;
+  --font-raleway: "Raleway", sans-serif;
+  --font-playfair: "Playfair Display", Georgia, serif;
+  --font-roboto:  "Roboto", sans-serif;
+}
+
+.font-outfit {
+  font-family: "Outfit", system-ui, sans-serif !important;
+}
+
+.font-rokkitt {
+  font-family: "Rokkitt", Georgia, serif !important;
+}
+
+.font-podkova {
+  font-family: "Podkova", serif;
+}
+
+.font-raleway {
+  font-family: "Raleway", sans-serif;
+}
+
+.font-playfair {
+  font-family: "Playfair Display", Georgia, serif;
+}
+
+.font-roboto {
+  font-family: "Roboto", sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  background: #FAF7ED;
+  color: #1A1A1A;
+  -webkit-font-smoothing: antialiased;
+}
+
+img   { max-width: 100%; display: block; }
+a     { text-decoration: none; color: inherit; }
+ul    { list-style: none; }
+@layer base {
+  button { cursor: pointer; border: none; font-family: inherit; }
+}
+
+/* Scroll-to-top */
+.scroll-top {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 900;
+  width: 44px; height: 44px;
+  background: #C9A227; color: #fff;
+  border-radius: 50%; font-size: 1.1rem;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 24px rgba(201,162,39,0.4);
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+.scroll-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.scroll-top:hover   { background: #9A7A10; transform: translateY(-2px); }
+
+/* Hide scrollbar utility */
+.hide-scrollbar               { scrollbar-width: none; -ms-overflow-style: none; }
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+
+/* Float animation (LB badge) */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+.animate-float { animation: float 3s ease-in-out infinite; }
+
+/* Fade-in animations */
+@keyframes fadeInUp   { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeInLeft { from { opacity:0; transform:translateX(-36px); } to { opacity:1; transform:translateX(0); } }
+
+/* Infinite Review Scroll Animations */
+@keyframes infiniteReviewScroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+.animate-review-scroll {
+  display: flex;
+  flex-shrink: 0;
+  animation: infiniteReviewScroll 38s linear infinite;
+  will-change: transform;
+}
+
+.review-scroll-wrapper:hover .animate-review-scroll,
+.review-scroll-wrapper:focus-within .animate-review-scroll {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-review-scroll {
+    animation: none;
+    transform: none;
+  }
+}
+
