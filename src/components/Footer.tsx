@@ -1,102 +1,196 @@
-import { Globe, MapPin, Phone, Mail, Send } from 'lucide-react';
+import { useState } from 'react';
+import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
-export default function Footer() {
+interface FooterProps {
+  onNavigate?: (page: string) => void;
+}
+
+export default function Footer({ onNavigate }: FooterProps) {
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+
+  const NAV_LINKS = [
+    { label: "Home", href: "/" },
+    { label: "Service", href: "/service" },
+    { label: "Experience", href: "/experience" },
+    { label: "About", href: "/about" },
+    { label: "Special Promo", href: "/special-promo" },
+    { label: "Blog", href: "/blog" },
+  ];
+
+  const handleLinkClick = (label: string) => {
+    if (onNavigate) {
+      onNavigate(label);
+    }
+  };
+
   return (
-    <footer className="bg-neutral-900 text-white pt-24 pb-12 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
-          
-          {/* Brand Info */}
-          <div className="space-y-8">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-gold rounded-full flex items-center justify-center font-serif text-2xl font-bold">
-                LB
+    <footer id="book" className="w-full">
+      {/* Bagian Olive */}
+      <div className="w-full bg-[#A68B0C] text-white pt-[42px] pb-[38px] lg:min-h-[412px] box-border">
+        <div className="w-full max-w-[1453px] mx-auto px-5 lg:px-[3.7vw]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1.6fr_1.4fr] gap-8 lg:gap-6 items-start">
+            {/* Kolom 1: Logo LB Putih + LUMIGLOW + Social + 3 Ikon Emas Solid Glyph Olive */}
+            <div className="flex flex-col items-start pt-[8px] h-full justify-between">
+              <div>
+                <img
+                  src="/images/home/Logo-Lumiglow.png"
+                  alt="LumiGlow Logo"
+                  className="h-[95px] w-auto object-contain block brightness-0 invert"
+                />
+                <span className="font-playfair font-normal text-[34px] leading-tight text-white tracking-normal block max-w-[178px] mt-1">
+                  LUMIGLOW
+                </span>
               </div>
-              <span className="font-serif text-2xl font-bold tracking-wide">LumiGlow</span>
+
+              {/* Blok Social & 3 Ikon Emas Solid: Posisi di 67-83% tinggi area */}
+              <div className="mt-[36px] lg:mt-[48px]">
+                <span className="font-raleway font-semibold text-[20px] text-white block mb-[10px]">
+                  Social
+                </span>
+
+                <div className="flex items-center gap-[10px]">
+                  {/* Facebook: rounded-full */}
+                  <a
+                    href="https://facebook.com"
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="Facebook"
+                    className="w-[42px] h-[42px] lg:w-[2.7vw] lg:h-[2.7vw] rounded-full bg-[#F2C419] flex items-center justify-center transition-transform hover:scale-105 cursor-pointer shadow-sm"
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#A68B0C">
+                      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                    </svg>
+                  </a>
+                  {/* Instagram: rounded-[12px] */}
+                  <a
+                    href="https://instagram.com"
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="Instagram"
+                    className="w-[42px] h-[42px] lg:w-[2.7vw] lg:h-[2.7vw] rounded-[10px] bg-[#F2C419] flex items-center justify-center transition-transform hover:scale-105 cursor-pointer shadow-sm"
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A68B0C" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                    </svg>
+                  </a>
+                  {/* TikTok: rounded-[12px] */}
+                  <a
+                    href="https://tiktok.com"
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="TikTok"
+                    className="w-[42px] h-[42px] lg:w-[2.7vw] lg:h-[2.7vw] rounded-[10px] bg-[#F2C419] flex items-center justify-center transition-transform hover:scale-105 cursor-pointer shadow-sm"
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#A68B0C">
+                      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.41a8.16 8.16 0 0 0 4.77 1.52V7.5a4.85 4.85 0 0 1-1-.81z" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
             </div>
-            <p className="text-white/50 leading-relaxed">
-              Memberikan pengalaman kecantikan premium dan perawatan yang disesuaikan untuk setiap individu di jantung kota Bali.
-            </p>
-            <div className="flex gap-4">
-              {[Globe].map((Icon, idx) => (
-                <a 
-                  key={idx} 
-                  href="#" 
-                  className="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center hover:bg-gold hover:border-gold transition-all"
+
+            {/* Kolom 2: Explore */}
+            <div className="flex flex-col items-start">
+              <div className="h-[62px] flex items-center">
+                <h4 className="font-raleway font-semibold text-[20px] text-white">
+                  Explore
+                </h4>
+              </div>
+              <div className="mt-[12px] flex flex-col">
+                {NAV_LINKS.map((link) => (
+                  <Link
+                    key={link.label}
+                    to={link.href}
+                    onClick={() => handleLinkClick(link.label)}
+                    className="font-raleway font-normal text-[20px] text-white leading-[35px] hover:text-stone-200 transition-colors block"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Kolom 3: Visit Us + Peta (Lebar ~28.6vw, Rasio 1.53:1) */}
+            <div className="flex flex-col items-start">
+              <div className="h-[62px] flex items-center">
+                <h4 className="font-raleway font-semibold text-[20px] text-white">
+                  Visit Us
+                </h4>
+              </div>
+              <a
+                href="https://maps.google.com/?q=Jl.+Danau+Tamblingan+No.27,+Sanur,+Denpasar+Selatan,+Kota+Denpasar,+Bali+80228"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Buka Lokasi LumiGlow di Google Maps"
+                className="w-full lg:w-[28.6vw] h-[18.7vw] min-h-[220px] rounded-[12px] overflow-hidden relative shadow-sm bg-stone-100 block cursor-pointer group"
+              >
+                <iframe
+                  src="https://maps.google.com/maps?q=Jl.+Danau+Tamblingan+No.27,+Sanur,+Denpasar+Selatan,+Bali&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                  className="w-full h-full border-0 pointer-events-none"
+                  loading="lazy"
+                  title="LumiGlow Sanur Map Location"
+                />
+              </a>
+            </div>
+
+            {/* Kolom 4: Jam Buka, Alamat & Input Email Pill Putih (Mulai ~72vw, Akhir ~96.4vw) */}
+            <div className="flex flex-col items-start">
+              {/* Spacer 62px agar teks jam sejajar dengan atas peta di Kolom 3 */}
+              <div className="h-[62px] hidden lg:block" />
+              <div className="flex flex-col justify-between w-full h-full min-h-[220px]">
+                <div>
+                  <span className="block font-raleway font-normal text-[20px] lg:text-[22px] leading-[31px] text-white">
+                    Every Day :
+                  </span>
+                  <span className="block font-raleway font-normal text-[20px] lg:text-[22px] leading-[31px] text-white">
+                    10. 00 - 22.00
+                  </span>
+                  <p className="mt-[7px] font-raleway font-light text-[15px] lg:text-[16px] leading-[28px] lg:leading-[31px] text-white max-w-[360px]">
+                    Jl. Danau Tamblingan No.27, Sanur, Denpasar Selatan, Kota Denpasar, Bali 80228, Indonesia
+                  </p>
+                </div>
+
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    if (newsletterEmail) {
+                      alert(`Thank you for subscribing to LumiGlow newsletter: ${newsletterEmail}`);
+                      setNewsletterEmail("");
+                    }
+                  }}
+                  className="w-full max-w-[362px] h-[3.3vw] min-h-[46px] bg-white rounded-full flex items-center pr-[4px] pl-[20px] shadow-sm relative mt-6"
                 >
-                  <Icon size={18} />
-                </a>
-              ))}
+                  <input
+                    type="email"
+                    required
+                    placeholder="Enter email"
+                    value={newsletterEmail}
+                    onChange={(e) => setNewsletterEmail(e.target.value)}
+                    className="w-full bg-transparent font-raleway text-[0.82vw] min-text-[12px] text-[#555] placeholder-[#555] focus:outline-none"
+                  />
+                  {/* Tombol Kirim: Lingkaran TERISI Emas Solid, Panah PUTIH */}
+                  <button
+                    type="submit"
+                    aria-label="Submit email"
+                    className="w-[38px] lg:w-[2.6vw] h-[38px] lg:h-[2.6vw] rounded-full bg-[#A68B0C] text-white flex items-center justify-center shrink-0 hover:brightness-110 active:scale-95 transition-all cursor-pointer shadow-xs"
+                  >
+                    <ArrowRight size={18} strokeWidth={2.5} className="text-white" />
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
-
-          {/* Quick Links */}
-          <div className="space-y-8">
-            <h4 className="font-serif text-xl font-bold">Tautan Cepat</h4>
-            <ul className="space-y-4">
-              {['Home', 'Tentang Kami', 'Layanan', 'Galeri', 'Blog'].map((item) => (
-                <li key={item}>
-                  <a href="#" className="text-white/50 hover:text-gold transition-colors">{item}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact Info */}
-          <div className="space-y-8">
-            <h4 className="font-serif text-xl font-bold">Hubungi Kami</h4>
-            <ul className="space-y-6">
-              <li className="flex gap-4 items-start text-white/50">
-                <MapPin className="text-gold shrink-0" size={20} />
-                <span>Jl. Danau Tamblingan No. 123, Sanur, Bali, Indonesia</span>
-              </li>
-              <li className="flex gap-4 items-center text-white/50">
-                <Phone className="text-gold shrink-0" size={20} />
-                <span>+62 812 3456 7890</span>
-              </li>
-              <li className="flex gap-4 items-center text-white/50">
-                <Mail className="text-gold shrink-0" size={20} />
-                <span>hello@lumiglow.com</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Newsletter */}
-          <div className="space-y-8">
-            <h4 className="font-serif text-xl font-bold">Newsletter</h4>
-            <p className="text-white/50">Dapatkan tips kecantikan dan penawaran eksklusif langsung di email Anda.</p>
-            <form className="relative">
-              <input 
-                type="email" 
-                placeholder="Email Anda" 
-                className="w-full bg-white/5 border border-white/10 rounded-full py-4 px-6 focus:outline-none focus:border-gold transition-colors"
-              />
-              <button className="absolute right-2 top-2 w-10 h-10 bg-gold rounded-full flex items-center justify-center hover:bg-gold-dark transition-colors">
-                <Send size={18} />
-              </button>
-            </form>
-          </div>
         </div>
+      </div>
 
-        {/* Map Placeholder */}
-        <div className="w-full h-64 bg-white/5 rounded-[2rem] overflow-hidden mb-12 relative group">
-          <div className="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/20 transition-all cursor-pointer">
-            <span className="bg-white text-neutral-900 px-6 py-2 rounded-full font-bold shadow-xl">LIHAT PETA</span>
-          </div>
-          <img 
-            src="https://api.placeholder.com/1200/400?text=Google+Maps+Placeholder" 
-            alt="Map" 
-            className="w-full h-full object-cover grayscale opacity-50"
-          />
-        </div>
-
-        <div className="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-white/30 text-sm">
-          <p>© 2026 LumiGlow Beauty Sanctuary. All rights reserved.</p>
-          <div className="flex gap-8">
-            <a href="#" className="hover:text-white">Privacy Policy</a>
-            <a href="#" className="hover:text-white">Terms of Service</a>
-          </div>
-        </div>
+      {/* Bar Bawah: Copyright Centered 76px tinggi */}
+      <div className="w-full bg-white h-[76px] flex items-center justify-center">
+        <span className="font-raleway font-semibold text-[20px] text-[#9A8412] tracking-normal text-center">
+          © 2025 by LumiglowBeautySalon
+        </span>
       </div>
     </footer>
   );

@@ -6,6 +6,8 @@
 
 :root {
   --cta-gradient: linear-gradient(90deg, #D9BC2B 0%, #A88D10 55%, #7B680C 100%);
+  --about-hero-gradient: linear-gradient(90deg, #453B08 0%, #AC8E12 50%, #E3C53A 100%);
+  --about-cream: #FFF7DC;
 }
 
 @theme {
@@ -23,6 +25,7 @@
   --font-outfit:  "Outfit", system-ui, sans-serif;
   --font-rokkitt: "Rokkitt", Georgia, serif;
   --font-podkova: "Podkova", serif;
+  --font-hero:    "Podkova", serif;
   --font-raleway: "Raleway", sans-serif;
   --font-playfair: "Playfair Display", Georgia, serif;
   --font-roboto:  "Roboto", sans-serif;
@@ -37,6 +40,10 @@
 }
 
 .font-podkova {
+  font-family: "Podkova", serif;
+}
+
+.font-hero {
   font-family: "Podkova", serif;
 }
 
@@ -126,6 +133,161 @@ ul    { list-style: none; }
   .animate-review-scroll {
     animation: none;
     transform: none;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   About Page Custom Animations
+   ───────────────────────────────────────────── */
+@keyframes aboutFloatGlow1 {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-5vw, 3vw, 0) scale(1.1); }
+  100% { transform: translate3d(4vw, -2vw, 0) scale(1.04); }
+}
+
+@keyframes aboutFloatGlow2 {
+  0% { transform: translate3d(0, 0, 0) scale(1.05); }
+  50% { transform: translate3d(6vw, -4vw, 0) scale(0.96); }
+  100% { transform: translate3d(-3vw, 3vw, 0) scale(1.12); }
+}
+
+@keyframes aboutFloatDark {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(4vw, 2vw, 0); }
+}
+
+.about-glow-layer-1 {
+  animation: aboutFloatGlow1 18s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.about-glow-layer-2 {
+  animation: aboutFloatGlow2 22s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.about-glow-layer-3 {
+  animation: aboutFloatDark 14s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.about-fade-up {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1), transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.about-fade-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-photo-slide {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 900ms cubic-bezier(0.22, 1, 0.36, 1) 150ms, transform 900ms cubic-bezier(0.22, 1, 0.36, 1) 150ms;
+}
+
+.about-photo-slide.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.about-stagger-1 {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 600ms cubic-bezier(0.22, 1, 0.36, 1) 100ms, transform 600ms cubic-bezier(0.22, 1, 0.36, 1) 100ms;
+}
+.about-stagger-1.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-stagger-2 {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 600ms cubic-bezier(0.22, 1, 0.36, 1) 200ms, transform 600ms cubic-bezier(0.22, 1, 0.36, 1) 200ms;
+}
+.about-stagger-2.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-stagger-3 {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 600ms cubic-bezier(0.22, 1, 0.36, 1) 300ms, transform 600ms cubic-bezier(0.22, 1, 0.36, 1) 300ms;
+}
+.about-stagger-3.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-card-hover {
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+@media (hover: hover) and (min-width: 1024px) {
+  .about-card-hover:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.22) !important;
+  }
+}
+
+.about-btn-hover {
+  transition: transform 200ms ease, filter 200ms ease;
+}
+.about-btn-hover .about-btn-arrow {
+  display: inline-block;
+  transition: transform 200ms ease;
+}
+@media (hover: hover) {
+  .about-btn-hover:hover {
+    transform: translateY(-2px);
+  }
+  .about-btn-hover:hover .about-btn-arrow {
+    transform: translateX(4px);
+  }
+  .team-card:hover .team-card-img {
+    transform: scale(1.08);
+  }
+}
+
+/* ─────────────────────────────────────────────
+   Our Team Card Image Zoom on Hover
+   ───────────────────────────────────────────── */
+.team-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  transform-origin: center;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .team-card-img {
+    transition: none !important;
+    transform: none !important;
+  }
+  .about-glow-layer-1,
+  .about-glow-layer-2,
+  .about-glow-layer-3 {
+    animation: none !important;
+    transform: none !important;
+  }
+  .about-fade-up,
+  .about-photo-slide,
+  .about-stagger-1,
+  .about-stagger-2,
+  .about-stagger-3 {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .about-card-hover:hover,
+  .about-btn-hover:hover {
+    transform: none !important;
   }
 }
 
